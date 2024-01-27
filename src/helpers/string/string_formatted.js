@@ -1,4 +1,3 @@
-const { v4: uuid4 } = require('uuid')
 const crypto = require('crypto')
 
 const convertToUpperCase = (str) => {
@@ -15,8 +14,17 @@ const convertToCapitalizedCase = (str) => {
   }).join(' ')
 }
 
-const generateUuidV4 = () => {
-  return uuid4()
+const convertToFormatDate = (date) => {
+  if (!date)  return ''
+
+  const dateObject = new Date(date)
+  const year = dateObject.getFullYear()
+  const month = String(dateObject.getMonth() + 1).padStart(2, '0')
+  const day = String(dateObject.getDate()).padStart(2, '0')
+  const hours = String(dateObject.getHours()).padStart(2, '0')
+  const minutes = String(dateObject.getMinutes()).padStart(2, '0')
+
+  return `${year}-${month}-${day} ${hours}:${minutes}`
 }
 
 const generateRandomCharacter = (length) => {
@@ -31,15 +39,10 @@ const generateRandomCharacter = (length) => {
   return randomCharacter
 }
 
-const generateUsernameFromName = (name) => {
-  return name.trim().replace(/\s+/g, '_').toLowerCase() + '_' + generateRandomCharacter(5)
-}
-
 module.exports = {
   convertToUpperCase,
   convertToLowerCase,
   convertToCapitalizedCase,
-  generateUuidV4,
-  generateRandomCharacter,
-  generateUsernameFromName
+  convertToFormatDate,
+  generateRandomCharacter
 }
