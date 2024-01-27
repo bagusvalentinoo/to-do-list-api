@@ -40,12 +40,12 @@ const pagination = (page, size) => {
   return { limit, offset }
 }
 
-const paginate = (model, page, limit, dataKey, resource) => {
+const paginate = (count, page, limit, dataKey, resource) => {
   return {
     [dataKey]: resource,
     pagination: {
-      total_item: model.count,
-      total_page: Math.ceil(model.count / limit),
+      total_item: count,
+      total_page: Math.ceil(count / limit),
       current_page: parseInt(page),
       next_page: parseInt(page) + 1,
       prev_page: parseInt(page) - 1,

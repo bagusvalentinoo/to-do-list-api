@@ -1,7 +1,4 @@
-const {
-  convertToUpperCase,
-  convertToLowerCase
-} = require('../string/string_formatted')
+const { convertToUpperCase, convertToLowerCase } = require('../string/string_formatted')
 
 const orderBy = (query) => {
   const { sort_by, sort_dir } = query

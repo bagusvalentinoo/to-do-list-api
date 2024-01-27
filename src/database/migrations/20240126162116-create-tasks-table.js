@@ -1,34 +1,35 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up (queryInterface, Sequelize) {
-    await queryInterface.createTable('user_tokens', {
+    await queryInterface.createTable('tasks', {
       id: {
         type: Sequelize.DataTypes.UUID,
         allowNull: false,
         primaryKey: true,
         defaultValue: Sequelize.DataTypes.UUIDV4
       },
-      user_id: {
-        type: Sequelize.DataTypes.UUID,
+      title: {
+        type: Sequelize.DataTypes.STRING,
         allowNull: false,
-        references: {
-          model: 'users',
-          key: 'id'
-        },
-        onUpdate: 'CASCADE',
-        onDelete: 'RESTRICT'
+        unique: true
       },
-      type: {
-        type: Sequelize.DataTypes.ENUM('Access', 'Refresh'),
-        allowNull: false
-      },
-      token: {
+      description: {
         type: Sequelize.DataTypes.TEXT,
-        allowNull: false
+        allowNull: true
       },
-      expired_at: {
+      status: {
+        type: Sequelize.DataTypes.ENUM('None', 'In Progress', 'Done'),
+        allowNull: false,
+        defaultValue: 'None'
+      },
+      priority: {
+        type: Sequelize.DataTypes.ENUM('Low', 'Medium', 'High'),
+        allowNull: false,
+        defaultValue: 'Low'
+      },
+      due_date: {
         type: Sequelize.DataTypes.DATE,
-        allowNull: false
+        allowNull: true
       },
       created_at: {
         type: Sequelize.DataTypes.DATE,
@@ -44,6 +45,6 @@ module.exports = {
   },
 
   async down (queryInterface, Sequelize) {
-    await queryInterface.dropTable('user_tokens')
+    await queryInterface.dropTable('tasks')
   }
 }

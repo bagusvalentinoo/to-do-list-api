@@ -1,5 +1,4 @@
 require('module-alias/register')
-const response = require('@helpers/http/response')
 const { generateRandomCharacter } = require('@helpers/string/string_formatted')
 const { ApiKey } = require('@models')
 
